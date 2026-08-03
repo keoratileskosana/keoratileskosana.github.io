@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Keoratile Skosana — IT Professional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #1a1612;
+      --white: #f7f3ee;
+      --mid: #7a6f65;
+      --light: #c4b8ad;
+      --accent: #2c2420;
+      --rule: #ddd5ca;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 48px;
+      background: rgba(247,243,238,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-text .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 7vw, 86px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    .hero-text h1 em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .hero-text p {
+      font-size: 15px;
+      color: var(--mid);
+      max-width: 460px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--black);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .hero-cta:hover { opacity: 0.5; }
+
+    /* Photo */
+    .hero-photo {
+      aspect-ratio: 3/4;
+      background: var(--light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--mid);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .photo-placeholder svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--rule);
+      fill: none;
+      stroke-width: 1;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION ── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 48px;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .about-grid h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 1.3;
+      grid-column: 1 / -1;
+    }
+
+    .about-grid p {
+      color: var(--mid);
+      line-height: 1.9;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    .skill-item {
+      background: var(--white);
+      padding: 24px 28px;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 40px;
+      padding: 32px 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .timeline-item:last-child { border-bottom: 1px solid var(--rule); }
+
+    .timeline-date {
+      font-size: 12px;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+      padding-top: 2px;
+    }
+
+    .timeline-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .timeline-content .sub {
+      font-size: 12px;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+
+    .timeline-content p {
+      color: var(--mid);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* ── DOCUMENTS ── */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    .doc-card {
+      background: var(--white);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: background 0.2s;
+    }
+
+    .doc-card:hover { background: #f4f4f4; }
+
+    .doc-icon {
+      width: 36px;
+      height: 44px;
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+    }
+
+    .doc-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+    }
+
+    .doc-card p {
+      font-size: 13px;
+      color: var(--mid);
+      flex: 1;
+    }
+
+    .doc-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--black);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 2px;
+      width: fit-content;
+      transition: opacity 0.2s;
+    }
+
+    .doc-download:hover { opacity: 0.45; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .contact-grid h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 8px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .contact-row:last-child { border-bottom: none; }
+
+    .contact-row .label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .contact-row .value {
+      font-size: 15px;
+    }
+
+    .contact-row a {
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: border-color 0.2s;
+    }
+
+    .contact-row a:hover { border-color: var(--black); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 32px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--mid);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-photo { max-width: 260px; }
+      section { padding: 60px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 24px; }
+      .docs-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Keoratile Skosana</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#documents">Documents</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow">IT Graduate · Centurion, Pretoria</p>
+      <h1>Keoratile<br/><em>Skosana</em></h1>
+      <p>Diploma in Information Technology Management. Grounded in IT governance, network infrastructure, and systems analysis — with a track record in leadership and stakeholder communication.</p>
+      <a class="hero-cta" href="#documents">View documents ↓</a>
+    </div>
+    <div class="hero-photo">
+      <img src="photo.jpeg" alt="Keoratile Skosana" />
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Profile</p>
+  <div class="about-grid">
+    <h2>Aspiring Information Technology Professional</h2>
+    <p>Graduated from Rosebank International College with a Diploma in Information Technology Management. Skilled in Active Directory, Windows OS support, Azure fundamentals, GitHub, and patch management — with hands-on experience in service coordination and CRM tools.</p>
+    <p>Experienced in leadership through the Student Representative Council, and in education as a Computer Architecture tutor. Fluent in English, isiZulu, and Setswana. Holds a Code 10 (C1) Driver's Licence. Seeking an entry-level IT support or graduate trainee role.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section>
+  <p class="section-label">Technical Skills</p>
+  <div class="skills-grid">
+    <div class="skill-item">Active Directory</div>
+    <div class="skill-item">Windows OS Support</div>
+    <div class="skill-item">Azure Fundamentals</div>
+    <div class="skill-item">GitHub</div>
+    <div class="skill-item">Patch Management</div>
+    <div class="skill-item">Service Coordination</div>
+    <div class="skill-item">CRM Tools</div>
+    <div class="skill-item">IT Governance</div>
+    <div class="skill-item">Network Infrastructure</div>
+    <div class="skill-item">Systems Analysis</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Experience & Education</p>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jan – Mar 2026</div>
+      <div class="timeline-content">
+        <h3>Telesales Representative</h3>
+        <div class="sub">Rosebank International College</div>
+        <p>Drove student recruitment through phone and digital outreach. Managed full engagement cycles, used CRM tools to track performance, and refined communication scripts to improve conversion rates.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jun 2025 – May 2026</div>
+      <div class="timeline-content">
+        <h3>Student Tutor — Computer Architecture</h3>
+        <div class="sub">Rosebank International College</div>
+        <p>Tutored topics including CPU structure, memory hierarchy, and pipelining. Simplified complex concepts to improve exam performance across one-on-one and group sessions.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2023 – 2025</div>
+      <div class="timeline-content">
+        <h3>Diploma in IT Management</h3>
+        <div class="sub">Rosebank International College (IIE) · Pretoria Central</div>
+        <p>Completed a comprehensive programme covering IT governance, network infrastructure, information security, and systems analysis. Served as Student Representative Council member.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2021</div>
+      <div class="timeline-content">
+        <h3>National Senior Certificate</h3>
+        <div class="sub">Netherlands Park Secondary School</div>
+        <p>Achieved a Bachelor's Pass. Achieved a Bachelor's Pass with notable results in Mathematical Literacy and Business Studies.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DOCUMENTS -->
+<section id="documents">
+  <p class="section-label">Documents</p>
+  <div class="docs-grid">
+
+    <div class="doc-card">
+      <div class="doc-icon">PDF</div>
+      <h3>Curriculum Vitae</h3>
+      <p>Full professional CV including work experience, skills, education, and references.</p>
+      <a class="doc-download" href="KEORATILE_SKOSANA'S%20CV.pdf" download>Download CV ↓</a>
+    </div>
+
+    <div class="doc-card">
+      <div class="doc-icon">PDF</div>
+      <h3>Diploma Certificate</h3>
+      <p>IIE Diploma in Information Technology Management, awarded 31 December 2025.</p>
+      <a class="doc-download" href="ST10400878%202.pdf" download>Download Certificate ↓</a>
+    </div>
+
+    <div class="doc-card">
+      <div class="doc-icon">PDF</div>
+      <h3>Matric Results</h3>
+      <p>National Senior Certificate — Republic of South Africa, Netherlands Park Secondary School.</p>
+      <a class="doc-download" href="Matric%20Results.pdf" download>Download Results ↓</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get in Touch</p>
+  <div class="contact-grid">
+    <h2>Open to opportunities.</h2>
+    <div class="contact-details">
+      <div class="contact-row">
+        <span class="label">WhatsApp</span>
+        <span class="value"><a href="https://wa.me/27721127787">Chat on WhatsApp</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="label">Email</span>
+        <span class="value"><a href="mailto:keoratile_skosana@icloud.com">keoratile_skosana@icloud.com</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="label">Phone</span>
+        <span class="value"><a href="tel:+27721127787">+27 72 112 7787</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="label">Location</span>
+        <span class="value">Centurion, Rooihuiskraal · Pretoria, South Africa</span>
+      </div>
+      <div class="contact-row">
+        <span class="label">Licence</span>
+        <span class="value">Code 10 (C1) Driver's Licence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Keoratile Skosana</span>
+  <span><a href="https://github.com/Keoratileskosana" style="color:var(--mid);text-decoration:none;">github.com/Keoratileskosana</a></span>
+</footer>
+
+</body>
+</html>
